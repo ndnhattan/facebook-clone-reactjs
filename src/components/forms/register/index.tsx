@@ -1,10 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { postRegisterUser } from '../../../utils/api';
-import { Button } from '../../../utils/styles';
 import { CreateUserParams } from '../../../utils/types';
 import { toast } from 'react-toastify';
-import styles from '../index.module.scss';
 import { UsernameField } from './UsernameField';
 import { NameField } from './NameField';
 import { PasswordField } from './PasswordField';
@@ -34,15 +32,20 @@ export const RegisterForm = () => {
   const formFieldProps = { errors, register };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+    <form className="w-[800px]" onSubmit={handleSubmit(onSubmit)}>
       <UsernameField {...formFieldProps} />
       <NameField {...formFieldProps} />
       <PasswordField {...formFieldProps} />
-      <Button className={styles.button}>Create My Account</Button>
-      <div className={styles.footerText}>
+      <button
+        className="my-[8px] bg-[#2b09ff] w-full py-[25px] rounded-[10px] text-base font-medium
+      transition-colors hover:bg-[#3415ff]"
+      >
+        Create My Account
+      </button>
+      <div className="mx-auto mt-[10px] text-center">
         <span>Already have an account? </span>
         <Link to="/login">
-          <span>Login</span>
+          <span className="underline text-[#b8b8b8]">Login</span>
         </Link>
       </div>
     </form>

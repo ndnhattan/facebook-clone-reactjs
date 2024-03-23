@@ -1,25 +1,22 @@
 import { FC } from 'react';
-import {
-  InputContainer,
-  InputLabel,
-  InputField,
-  InputContainerHeader,
-  InputError,
-} from '../../../utils/styles';
 import { RegisterFormFieldProps } from '../../../utils/types/form';
-import styles from '../index.module.scss';
 
 export const NameField: FC<RegisterFormFieldProps> = ({ register, errors }) => {
   return (
-    <section className={styles.nameFieldRow}>
-      <InputContainer>
-        <InputContainerHeader>
-          <InputLabel htmlFor="firstName">First Name</InputLabel>
+    <section className="flex justify-between my-2 gap-2">
+      <div className="bg-[#131313] px-4 py-3 rounded-[10px] w-full">
+        <div className="flex justify-between">
+          <label htmlFor="firstName" className="text-[#8f8f8f] my-1 text-sm">
+            First Name
+          </label>
           {errors.firstName && (
-            <InputError>{errors.firstName.message}</InputError>
+            <span className="text-[#ff0000] uppercase text-[11px]">
+              {errors.firstName.message}
+            </span>
           )}
-        </InputContainerHeader>
-        <InputField
+        </div>
+        <input
+          className="text-lg font-medium my-1 w-full bg-inherit outline-none"
           type="text"
           id="firstName"
           {...register('firstName', {
@@ -28,15 +25,20 @@ export const NameField: FC<RegisterFormFieldProps> = ({ register, errors }) => {
             maxLength: 32,
           })}
         />
-      </InputContainer>
-      <InputContainer>
-        <InputContainerHeader>
-          <InputLabel htmlFor="lastName">Last Name</InputLabel>
+      </div>
+      <div className="bg-[#131313] px-4 py-3 rounded-[10px] w-full">
+        <div className="flex justify-between">
+          <label htmlFor="lastName" className="text-[#8f8f8f] my-1 text-sm">
+            Last Name
+          </label>
           {errors.lastName && (
-            <InputError>{errors.lastName.message}</InputError>
+            <span className="text-[#ff0000] uppercase text-[11px]">
+              {errors.lastName.message}
+            </span>
           )}
-        </InputContainerHeader>
-        <InputField
+        </div>
+        <input
+          className="text-lg font-medium my-1 w-full bg-inherit outline-none"
           type="text"
           id="lastName"
           {...register('lastName', {
@@ -45,7 +47,7 @@ export const NameField: FC<RegisterFormFieldProps> = ({ register, errors }) => {
             maxLength: 32,
           })}
         />
-      </InputContainer>
+      </div>
     </section>
   );
 };

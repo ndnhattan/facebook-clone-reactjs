@@ -1,14 +1,6 @@
 import { FC, useState } from 'react';
-import {
-  InputContainer,
-  InputLabel,
-  InputField,
-  InputContainerHeader,
-  InputError,
-} from '../../../utils/styles';
 import { RegisterFormFieldProps } from '../../../utils/types/form';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
-import styles from '../index.module.scss';
 
 export const PasswordField: FC<RegisterFormFieldProps> = ({
   register,
@@ -17,13 +9,20 @@ export const PasswordField: FC<RegisterFormFieldProps> = ({
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <InputContainer>
-      <InputContainerHeader>
-        <InputLabel htmlFor="password">Password</InputLabel>
-        {errors.password && <InputError>{errors.password.message}</InputError>}
-      </InputContainerHeader>
-      <div className={styles.passwordContainer}>
-        <InputField
+    <div className="bg-[#131313] px-4 py-3 rounded-[10px]">
+      <div className="flex justify-between">
+        <label htmlFor="password" className="text-[#8f8f8f] my-1 text-sm">
+          Password
+        </label>
+        {errors.password && (
+          <span className="text-[#ff0000] uppercase text-[11px]">
+            {errors.password.message}
+          </span>
+        )}
+      </div>
+      <div className="flex items-center">
+        <input
+          className="text-lg font-medium my-1 w-full bg-inherit outline-none"
           type={showPassword ? 'text' : 'password'}
           id="password"
           {...register('password', {
@@ -52,6 +51,6 @@ export const PasswordField: FC<RegisterFormFieldProps> = ({
           />
         )}
       </div>
-    </InputContainer>
+    </div>
   );
 };
