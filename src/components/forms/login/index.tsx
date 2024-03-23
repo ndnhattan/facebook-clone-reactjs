@@ -21,6 +21,7 @@ export const LoginForm = () => {
       const { accessToken, refreshToken } = await postLoginUser(data);
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
+
       console.log('Success');
       socket.connect();
       console.log(socket.connected);
