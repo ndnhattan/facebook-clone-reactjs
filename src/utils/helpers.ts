@@ -107,3 +107,6 @@ export const getUserFriendInstance = (
   authenticatedUser?.id === selectedFriend?.sender.id
     ? selectedFriend?.receiver
     : selectedFriend?.sender;
+
+export const getAccessToken = () => localStorage.getItem('accessToken');
+export const getRefreshToken = () => localStorage.getItem('refreshToken');

@@ -28,17 +28,68 @@ import {
   User,
   UserCredentialsParams,
 } from './types';
+import { getRefreshToken } from './helpers';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-const axiosClient = axios.create({ baseURL: API_URL });
+const axiosClient = axios.create({
+  baseURL: API_URL,
+});
 const config: AxiosRequestConfig = { withCredentials: true };
+
+axiosClient.interceptors.request.use(
+  (config) => {
+    if (config && config.headers) {
+      const token = localStorage.getItem('accessToken');
+
+      if (token) {
+        config.headers['Authorization'] = `Bearer ${token}`;
+      }
+    }
+
+    return config;
+  },
+
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+axiosClient.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async function (error) {
+    const originalRequest = error.config;
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      const { accessToken } = await refreshAccessToken();
+      localStorage.setItem('accessToken', accessToken);
+      axios.defaults.headers.common['Authorization'] = 'Bearer ' + accessToken;
+      return axiosClient(originalRequest);
+    }
+    return Promise.reject(error);
+  }
+);
 
 export const postRegisterUser = (data: CreateUserParams) =>
   axiosClient.post(`/auth/register`, data, config);
 
-export const postLoginUser = (data: UserCredentialsParams) =>
-  axiosClient.post(`/auth/login`, data, config);
+export const postLoginUser = async (data: UserCredentialsParams) => {
+  const response = await axiosClient.post(`/auth/login`, data, config);
+
+  return response.data;
+};
+
+const refreshAccessToken = async () => {
+  const response = await axiosClient.post(
+    `/auth/refresh-token`,
+    { refreshToken: getRefreshToken() },
+    config
+  );
+
+  return response.data;
+};
 
 export const getAuthUser = () => axiosClient.get<User>(`/auth/status`, config);
 
