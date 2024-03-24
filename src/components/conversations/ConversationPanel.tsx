@@ -1,9 +1,3 @@
-import { ConversationChannelPageStyle } from '../../utils/styles';
-
 export const ConversationPanel = () => {
-  return (
-    <ConversationChannelPageStyle>
-      ConversationPanel
-    </ConversationChannelPageStyle>
-  );
+  return <div className="h-full w-full overflow-hidden"></div>;
 };

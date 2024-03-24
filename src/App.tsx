@@ -27,6 +27,7 @@ import { SettingsAppearancePage } from './pages/settings/SettingsAppearancePage'
 import { CallsPage } from './pages/calls/CallsPage';
 import { CurrentCallPage } from './pages/calls/CurrentCallPage';
 import { PublicRoute } from './components/PublicRoute';
+import { setTheme } from './utils/helpers';
 
 enableMapSet();
 
@@ -54,15 +55,20 @@ function AppWithProviders({
 
 function App() {
   const [user, setUser] = useState<User>();
+  setTheme();
+
   return (
-    <div className="text-white bg-[#1a1a1a] min-h-screen">
+    <div className="h-screen">
       <AppWithProviders user={user} setUser={setUser} socket={socket}>
         <Routes>
           <Route element={<PublicRoute />}>
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
           </Route>
-          <Route element={<AuthenticatedRoute children={<AppPage />} />}>
+          <Route
+            path="messenger"
+            element={<AuthenticatedRoute children={<AppPage />} />}
+          >
             <Route path="conversations" element={<ConversationPage />}>
               <Route
                 path=":id"

@@ -6,15 +6,9 @@ import { AppDispatch, RootState } from '../store';
 import { removeFriendRequest } from '../store/friends/friendsSlice';
 import { SocketContext } from '../utils/context/SocketContext';
 import { useToast } from '../utils/hooks/useToast';
-import {
-  AcceptFriendRequestResponse,
-  FriendRequest,
-  SelectableTheme,
-} from '../utils/types';
+import { AcceptFriendRequestResponse, FriendRequest } from '../utils/types';
 import { BsFillPersonCheckFill } from 'react-icons/bs';
 import { fetchFriendRequestThunk } from '../store/friends/friendsThunk';
-import { ThemeProvider } from 'styled-components';
-import { DarkTheme, LightTheme } from '../utils/themes';
 import Peer from 'peerjs';
 import { AuthContext } from '../utils/context/AuthContext';
 import {
@@ -42,8 +36,6 @@ export const AppPage = () => {
   const { peer, call, isReceivingCall, caller, connection, callType } =
     useSelector((state: RootState) => state.call);
   const { info } = useToast({ theme: 'dark' });
-  const { theme } = useSelector((state: RootState) => state.settings);
-  const storageTheme = localStorage.getItem('theme') as SelectableTheme;
   useEffect(() => {
     dispatch(fetchFriendRequestThunk());
   }, [dispatch]);
@@ -177,22 +169,12 @@ export const AppPage = () => {
   }, [connection]);
 
   return (
-    <ThemeProvider
-      theme={
-        storageTheme
-          ? storageTheme === 'dark'
-            ? DarkTheme
-            : LightTheme
-          : theme === 'dark'
-          ? DarkTheme
-          : LightTheme
-      }
-    >
+    <div>
       {isReceivingCall && caller && <CallReceiveDialog />}
-      <div className="flex min-h-screen">
+      <div className="flex h-screen">
         <UserSidebar />
         <Outlet />
       </div>
-    </ThemeProvider>
+    </div>
   );
 };

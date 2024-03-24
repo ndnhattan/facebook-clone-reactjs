@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import React, { FC, useContext, useState, useEffect } from 'react';
+import { FC, useContext, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { RootState } from '../../store';
@@ -14,12 +14,7 @@ import { createMessage } from '../../utils/api';
 import { AuthContext } from '../../utils/context/AuthContext';
 import { getRecipientFromConversation } from '../../utils/helpers';
 import { useToast } from '../../utils/hooks/useToast';
-import {
-  MessagePanelBody,
-  MessagePanelFooter,
-  MessagePanelStyle,
-  MessageTypingStatus,
-} from '../../utils/styles';
+import { MessagePanelBody } from '../../utils/styles';
 import { MessageAttachmentContainer } from './attachments/MessageAttachmentContainer';
 import { MessageContainer } from './MessageContainer';
 import { MessageInputField } from './MessageInputField';
@@ -104,12 +99,12 @@ export const MessagePanel: FC<Props> = ({
 
   return (
     <>
-      <MessagePanelStyle>
+      <div className="flex flex-col w-full">
         <MessagePanelHeader />
         <MessagePanelBody>
           <MessageContainer />
         </MessagePanelBody>
-        <MessagePanelFooter>
+        <div className=" px-2 h-[60px] flex items-center">
           {attachments.length > 0 && <MessageAttachmentContainer />}
           <MessageInputField
             content={content}
@@ -122,11 +117,11 @@ export const MessagePanel: FC<Props> = ({
                 : recipient?.firstName || 'user'
             }
           />
-          <MessageTypingStatus>
+          {/* <MessageTypingStatus>
             {isRecipientTyping ? `${recipient?.firstName} is typing...` : ''}
-          </MessageTypingStatus>
-        </MessagePanelFooter>
-      </MessagePanelStyle>
+          </MessageTypingStatus> */}
+        </div>
+      </div>
     </>
   );
 };

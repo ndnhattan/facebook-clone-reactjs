@@ -71,11 +71,9 @@ export const ConversationChannelPage = () => {
   };
 
   return (
-    <ConversationChannelPageStyle>
-      <MessagePanel
-        sendTypingStatus={sendTypingStatus}
-        isRecipientTyping={isRecipientTyping}
-      ></MessagePanel>
-    </ConversationChannelPageStyle>
+    <MessagePanel
+      sendTypingStatus={sendTypingStatus}
+      isRecipientTyping={isRecipientTyping}
+    ></MessagePanel>
   );
 };

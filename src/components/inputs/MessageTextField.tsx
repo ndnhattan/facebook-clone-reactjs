@@ -86,15 +86,16 @@ export const MessageTextField: FC<Props> = ({
   };
 
   return (
-    <MessageTextarea
+    <textarea
+      className="bg-primary-gray w-full rounded-xl resize-none my-1 outline-none h-[21px]"
       ref={ref}
       value={message}
       onChange={onMessageChange}
-      placeholder="Send a Message"
+      placeholder="Aa"
       maxLength={maxLength}
       onKeyDown={onKeyDown}
       onDrop={onDrop}
       onPaste={onPaste}
-    ></MessageTextarea>
+    ></textarea>
   );
 };

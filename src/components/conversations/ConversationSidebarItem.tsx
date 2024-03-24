@@ -3,17 +3,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { CDN_URL } from '../../utils/constants';
 import { AuthContext } from '../../utils/context/AuthContext';
 import { getRecipientFromConversation } from '../../utils/helpers';
-import {
-  ConversationSidebarItemDetails,
-  ConversationSidebarItemStyle,
-} from '../../utils/styles';
-import { Conversation } from '../../utils/types';
 import defaultAvatar from '../../__assets__/default_avatar.jpg';
 
-import styles from './index.module.scss';
-
 type Props = {
-  conversation: Conversation;
+  conversation: any;
 };
 
 export const ConversationSidebarItem: React.FC<Props> = ({ conversation }) => {
@@ -34,29 +27,27 @@ export const ConversationSidebarItem: React.FC<Props> = ({ conversation }) => {
   const hasProfilePicture = () => recipient?.profile?.avatar;
 
   return (
-    <>
-      <ConversationSidebarItemStyle
-        onClick={() => navigate(`/conversations/${conversation.id}`)}
-        selected={parseInt(id!) === conversation.id}
-      >
-        <img
-          src={
-            hasProfilePicture()
-              ? CDN_URL.BASE.concat(recipient?.profile?.avatar!)
-              : defaultAvatar
-          }
-          alt="avatar"
-          className={styles.conversationAvatar}
-        />
-        <ConversationSidebarItemDetails>
-          <span className="conversationName">
-            {`${recipient?.firstName} ${recipient?.lastName}`}
-          </span>
-          <span className="conversationLastMessage">
-            {lastMessageContent()}
-          </span>
-        </ConversationSidebarItemDetails>
-      </ConversationSidebarItemStyle>
-    </>
+    <div
+      className={`flex items-center gap-3 py-2 px-2 w-full cursor-pointer rounded-lg ${
+        id == conversation.id ? 'bg-[#ebf5ff]' : 'hover:bg-primary-gray'
+      }`}
+      onClick={() => navigate(`/messenger/conversations/${conversation.id}`)}
+    >
+      <img
+        src={
+          hasProfilePicture()
+            ? CDN_URL.BASE.concat(recipient?.profile?.avatar!)
+            : defaultAvatar
+        }
+        alt="avatar"
+        className="h-[56px] w-[56px] rounded-full"
+      />
+      <div className="break-all flex flex-col flex-1">
+        <span className="font-semibold">
+          {`${recipient?.firstName} ${recipient?.lastName}`}
+        </span>
+        <span className="text-sm">{lastMessageContent()}</span>
+      </div>
+    </div>
   );
 };

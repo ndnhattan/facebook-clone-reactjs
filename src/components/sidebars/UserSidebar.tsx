@@ -31,7 +31,7 @@ export const UserSidebar = () => {
         </header>
         <div className="w-full h-full flex flex-col items-center">
           {userSidebarItems.map((item) => (
-            <UserSidebarItem item={item} />
+            <UserSidebarItem item={item} key={item.id} />
           ))}
         </div>
 

@@ -20,16 +20,18 @@ export const MessageInputField: FC<Props> = ({
   sendMessage,
   sendTypingStatus,
 }) => {
-  const ICON_SIZE = 36;
   const MAX_LENGTH = 2048;
   const [isMultiLine, setIsMultiLine] = useState(false);
   const atMaxLength = content.length === MAX_LENGTH;
 
   return (
     <>
-      <MessageInputContainer isMultiLine={isMultiLine}>
+      <div className="rounded-[5px] w-full py-2 flex gap-[12px] items-center relative">
         <MessageAttachmentActionIcon />
-        <form onSubmit={sendMessage} className={styles.form}>
+        <form
+          onSubmit={sendMessage}
+          className="w-full flex bg-primary-gray items-center pl-[12px] pr-2 py-[3px] rounded-3xl"
+        >
           <MessageTextField
             message={content}
             setMessage={setContent}
@@ -38,14 +40,14 @@ export const MessageInputField: FC<Props> = ({
             sendTypingStatus={sendTypingStatus}
             sendMessage={sendMessage}
           />
+          <FaceVeryHappy className={styles.icon} size={24} color="#0084ff" />
         </form>
-        <FaceVeryHappy className={styles.icon} size={ICON_SIZE} />
         {atMaxLength && (
           <CharacterLimit atMaxLength={atMaxLength}>
             {`${content.length}/${MAX_LENGTH}`}
           </CharacterLimit>
         )}
-      </MessageInputContainer>
+      </div>
     </>
   );
 };

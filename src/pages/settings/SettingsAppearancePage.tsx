@@ -1,5 +1,4 @@
 import { useDispatch } from 'react-redux';
-import { setTheme } from '../../store/settings/settingsSlice';
 import { Page } from '../../utils/styles';
 import { SelectableTheme } from '../../utils/types';
 
@@ -7,7 +6,6 @@ export const SettingsAppearancePage = () => {
   const dispatch = useDispatch();
 
   const handleThemeChange = (theme: SelectableTheme) => {
-    dispatch(setTheme(theme));
     localStorage.setItem('theme', theme);
   };
 

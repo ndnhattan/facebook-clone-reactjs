@@ -1,6 +1,5 @@
-import { ChatAdd } from 'akar-icons';
+import { ChatAdd, MoreHorizontalFill, Search } from 'akar-icons';
 import { useEffect, useState } from 'react';
-import { AiOutlineUsergroupAdd } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
 import {
@@ -8,18 +7,8 @@ import {
   setSelectedGroup,
   toggleContextMenu,
 } from '../../store/groupSlice';
-import { SidebarContainerStyle } from '../../utils/styles';
-import {
-  ConversationSearchbar,
-  SidebarHeader,
-  SidebarStyle,
-  ScrollableContainer,
-} from '../../utils/styles';
 import { ContextMenuEvent, Group } from '../../utils/types';
-import { GroupSidebarContextMenu } from '../context-menus/GroupSidebarContextMenu';
 import { ConversationSidebarItem } from '../conversations/ConversationSidebarItem';
-import { ConversationTab } from '../conversations/ConversationTab';
-import { GroupSidebarItem } from '../groups/GroupSidebarItem';
 import { CreateConversationModal } from '../modals/CreateConversationModal';
 import { CreateGroupModal } from '../modals/CreateGroupModal';
 
@@ -29,6 +18,7 @@ export const ConversationSidebar = () => {
   const conversations = useSelector(
     (state: RootState) => state.conversation.conversations
   );
+
   const showGroupContextMenu = useSelector(
     (state: RootState) => state.groups.showGroupContextMenu
   );
@@ -59,52 +49,47 @@ export const ConversationSidebar = () => {
   }, []);
 
   return (
-    <>
+    <div className="border-r w-[500px]">
       {showModal && conversationType === 'private' && (
         <CreateConversationModal setShowModal={setShowModal} />
       )}
       {showModal && conversationType === 'group' && (
         <CreateGroupModal setShowModal={setShowModal} />
       )}
-      <SidebarStyle>
-        <SidebarHeader>
-          <ConversationSearchbar placeholder="Search for Conversations" />
-          {conversationType === 'private' ? (
-            <ChatAdd
-              size={30}
-              cursor="pointer"
-              onClick={() => setShowModal(true)}
+      <div className="flex flex-col h-full ">
+        <div className="px-4 py-2 border-b">
+          <div className="flex justify-between">
+            <span className="text-2xl font-bold">Chats</span>
+            <div className="flex gap-3">
+              <div className="cursor-pointer rounded-full bg-primary-gray w-9 h-9 flex items-center justify-center">
+                <MoreHorizontalFill size={22} />
+              </div>
+              <div
+                className="cursor-pointer rounded-full bg-primary-gray w-9 h-9 flex items-center justify-center"
+                onClick={() => setShowModal(true)}
+              >
+                <ChatAdd size={22} />
+              </div>
+            </div>
+          </div>
+          <div className="bg-primary-gray rounded-3xl mt-3 flex items-center px-2 py-1 gap-1">
+            <Search size={20} />
+            <input
+              className="bg-inherit outline-none w-full mr-1"
+              placeholder="Search Messenger"
             />
-          ) : (
-            <AiOutlineUsergroupAdd
-              size={30}
-              cursor="pointer"
-              onClick={() => setShowModal(true)}
+          </div>
+        </div>
+
+        <div className="px-2 overflow-y-auto">
+          {conversations.map((conversation) => (
+            <ConversationSidebarItem
+              key={conversation.id}
+              conversation={conversation}
             />
-          )}
-        </SidebarHeader>
-        <ConversationTab />
-        <ScrollableContainer>
-          <SidebarContainerStyle>
-            {conversationType === 'private'
-              ? conversations.map((conversation) => (
-                  <ConversationSidebarItem
-                    key={conversation.id}
-                    conversation={conversation}
-                  />
-                ))
-              : groups.map((group) => (
-                  <GroupSidebarItem
-                    key={group.id}
-                    group={group}
-                    onContextMenu={onGroupContextMenu}
-                  />
-                ))}
-            {showGroupContextMenu && <GroupSidebarContextMenu />}
-          </SidebarContainerStyle>
-        </ScrollableContainer>
-        <footer></footer>
-      </SidebarStyle>
-    </>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 };
