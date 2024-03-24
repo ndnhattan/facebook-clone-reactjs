@@ -6,7 +6,6 @@ import { AppDispatch, RootState } from '../store';
 import { removeFriendRequest } from '../store/friends/friendsSlice';
 import { SocketContext } from '../utils/context/SocketContext';
 import { useToast } from '../utils/hooks/useToast';
-import { LayoutPage } from '../utils/styles';
 import {
   AcceptFriendRequestResponse,
   FriendRequest,
@@ -190,10 +189,10 @@ export const AppPage = () => {
       }
     >
       {isReceivingCall && caller && <CallReceiveDialog />}
-      <LayoutPage>
+      <div className="flex min-h-screen">
         <UserSidebar />
         <Outlet />
-      </LayoutPage>
+      </div>
     </ThemeProvider>
   );
 };

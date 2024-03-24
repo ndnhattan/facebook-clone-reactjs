@@ -1,10 +1,4 @@
 import { useState, useContext } from 'react';
-import {
-  UserSidebarFooter,
-  UserSidebarHeader,
-  UserSidebarScrollableContainer,
-  UserSidebarStyle,
-} from '../../utils/styles';
 import { userSidebarItems } from '../../utils/constants';
 import { UserSidebarItem } from './items/UserSidebarItem';
 import { AuthContext } from '../../utils/context/AuthContext';
@@ -16,30 +10,35 @@ import { useNavigate } from 'react-router-dom';
 
 export const UserSidebar = () => {
   const [showModal, setShowModal] = useState(false);
-  const { user } = useContext(AuthContext);
+  const { user, updateAuthUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const logoutUser = () => {
-    logoutUserAPI().finally(() => navigate('/login', { replace: true }));
+    logoutUserAPI().finally(() => {
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
+      updateAuthUser(undefined);
+      navigate('/login', { replace: true });
+    });
   };
 
   return (
     <>
       {showModal && <UpdatePresenceStatusModal setShowModal={setShowModal} />}
-      <UserSidebarStyle>
-        <UserSidebarHeader>
+      <div className="flex flex-col items-center flex-[0_0_80px] bg-[#15161E]">
+        <header className="h-[90px] flex items-center justify-center border-b border-[#494949a9] w-full box-border">
           <UserAvatar user={user!} onClick={() => setShowModal(true)} />
-        </UserSidebarHeader>
-        <UserSidebarScrollableContainer>
+        </header>
+        <div className="w-full h-full flex flex-col items-center">
           {userSidebarItems.map((item) => (
             <UserSidebarItem item={item} />
           ))}
-        </UserSidebarScrollableContainer>
+        </div>
 
-        <UserSidebarFooter>
+        <footer className="py-[18px]">
           <RiLogoutCircleLine size={30} onClick={() => logoutUser()} />
-        </UserSidebarFooter>
-      </UserSidebarStyle>
+        </footer>
+      </div>
     </>
   );
 };
