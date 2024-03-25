@@ -9,11 +9,8 @@ export const PasswordField: FC<RegisterFormFieldProps> = ({
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="bg-[#131313] px-4 py-3 rounded-[10px]">
+    <div className="border bg-primary-gray px-3 py-2 rounded-md w-full mt-3">
       <div className="flex justify-between">
-        <label htmlFor="password" className="text-[#8f8f8f] my-1 text-sm">
-          Password
-        </label>
         {errors.password && (
           <span className="text-[#ff0000] uppercase text-[11px]">
             {errors.password.message}
@@ -22,7 +19,8 @@ export const PasswordField: FC<RegisterFormFieldProps> = ({
       </div>
       <div className="flex items-center">
         <input
-          className="text-lg font-medium my-1 w-full bg-inherit outline-none"
+          placeholder="New password"
+          className="  w-full bg-inherit outline-none"
           type={showPassword ? 'text' : 'password'}
           id="password"
           {...register('password', {

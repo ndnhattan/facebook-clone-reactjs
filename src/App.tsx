@@ -5,7 +5,6 @@ import { AuthenticatedRoute } from './components/AuthenticatedRoute';
 import { ConversationChannelPage } from './pages/conversations/ConversationChannelPage';
 import { ConversationPage } from './pages/conversations/ConversationPage';
 import { LoginPage } from './pages/LoginPage';
-import { RegisterPage } from './pages/RegisterPage';
 import { AuthContext } from './utils/context/AuthContext';
 import { socket, SocketContext } from './utils/context/SocketContext';
 import { User } from './utils/types';
@@ -58,11 +57,10 @@ function App() {
   setTheme();
 
   return (
-    <div className="h-screen">
+    <div className="bg-primary-gray min-h-screen">
       <AppWithProviders user={user} setUser={setUser} socket={socket}>
         <Routes>
           <Route element={<PublicRoute />}>
-            <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
           </Route>
           <Route

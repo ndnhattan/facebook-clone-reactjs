@@ -3,16 +3,13 @@ import { FC } from 'react';
 import { checkUsernameExists } from '../../../utils/api';
 import { RegisterFormFieldProps } from '../../../utils/types/form';
 
-export const UsernameField: FC<RegisterFormFieldProps> = ({
+export const EmailField: FC<RegisterFormFieldProps> = ({
   register,
   errors,
 }) => {
   return (
-    <div className="bg-[#131313] px-4 py-3 rounded-[10px]">
+    <div className="border bg-primary-gray px-3 py-2 rounded-md w-full mt-3">
       <div className="flex justify-between">
-        <label htmlFor="username" className="text-[#8f8f8f] my-1 text-sm">
-          Username
-        </label>
         {errors.username && (
           <span className="text-[#ff0000] uppercase text-[11px]">
             {errors.username.message}
@@ -20,7 +17,8 @@ export const UsernameField: FC<RegisterFormFieldProps> = ({
         )}
       </div>
       <input
-        className="text-lg font-medium my-1 w-full bg-inherit outline-none"
+        placeholder="Email address"
+        className="w-full bg-inherit outline-none"
         type="text"
         id="username"
         {...register('username', {

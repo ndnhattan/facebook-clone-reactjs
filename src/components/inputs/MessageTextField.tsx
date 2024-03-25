@@ -87,7 +87,7 @@ export const MessageTextField: FC<Props> = ({
 
   return (
     <textarea
-      className="bg-primary-gray w-full rounded-xl resize-none my-1 outline-none h-[21px]"
+      className="bg-inherit w-full resize-none my-1 outline-none h-[24px]"
       ref={ref}
       value={message}
       onChange={onMessageChange}

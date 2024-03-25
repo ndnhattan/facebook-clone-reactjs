@@ -26,11 +26,15 @@ export const MessageInputField: FC<Props> = ({
 
   return (
     <>
-      <div className="rounded-[5px] w-full py-2 flex gap-[12px] items-center relative">
+      <div
+        className={`rounded-[5px] w-full py-2 flex gap-[12px] relative ${
+          isMultiLine ? 'items-end' : 'items-center'
+        }`}
+      >
         <MessageAttachmentActionIcon />
         <form
           onSubmit={sendMessage}
-          className="w-full flex bg-primary-gray items-center pl-[12px] pr-2 py-[3px] rounded-3xl"
+          className={`w-full flex bg-primary-gray pl-3 gap-1 pr-2 py-[3px] rounded-3xl items-center`}
         >
           <MessageTextField
             message={content}

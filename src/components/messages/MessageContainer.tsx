@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { AppDispatch, RootState } from '../../store';
@@ -8,7 +8,6 @@ import { selectConversationMessage } from '../../store/messages/messageSlice';
 import { selectGroupMessage } from '../../store/groupMessageSlice';
 import { selectType } from '../../store/selectedSlice';
 import { MessageItemHeader } from './MessageItemHeader';
-import { MessageItemContainerBody } from './MessageItemContainerBody';
 import { useHandleClick, useKeydown } from '../../utils/hooks';
 import { UserAvatar } from '../users/UserAvatar';
 import {
@@ -26,8 +25,11 @@ import {
 } from '../../store/messageContainerSlice';
 import { SystemMessage } from './system/SystemMessage';
 import { SystemMessageList } from './system/SystemMessageList';
+import { AuthContext } from '../../utils/context/AuthContext';
+import { MessageItemContainerBody } from './MessageItemContainerBody';
 
 export const MessageContainer = () => {
+  const { user } = useContext(AuthContext);
   const { id } = useParams();
   const dispatch = useDispatch<AppDispatch>();
   const conversationMessages = useSelector((state: RootState) =>
@@ -89,6 +91,7 @@ export const MessageContainer = () => {
               message={message}
               onEditMessageChange={onEditMessageChange}
               padding="8px 0 0 0"
+              owner={user?.id === message.author.id}
             />
           </MessageItemDetails>
         ) : (
@@ -96,6 +99,7 @@ export const MessageContainer = () => {
             message={message}
             onEditMessageChange={onEditMessageChange}
             padding="0 0 0 70px"
+            owner={user?.id === message.author.id}
           />
         )}
       </MessageItemContainer>
@@ -112,12 +116,12 @@ export const MessageContainer = () => {
         }
       }}
     >
-      <>
+      <div className="flex flex-col">
         <SystemMessageList />
         {selectedType === 'private'
           ? conversationMessages?.messages.map(mapMessages)
           : groupMessages?.messages.map(mapMessages)}
-      </>
+      </div>
       {showContextMenu && <SelectedMessageContextMenu />}
     </MessageContainerStyle>
   );

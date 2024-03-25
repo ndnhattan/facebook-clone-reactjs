@@ -1,12 +1,17 @@
 export type CreateUserParams = {
+  email: string;
   username: string;
   firstName: string;
   lastName: string;
   password: string;
+  day: string;
+  month: string;
+  year: string;
+  gender: Gender;
 };
 
 export type UserCredentialsParams = {
-  username: string;
+  email: string;
   password: string;
 };
 
@@ -336,6 +341,12 @@ export type UpdateGroupDetailsPayload = {
 
 export enum UpdateGroupAction {
   NEW_MESSAGE = 'newMessage',
+}
+
+export enum Gender {
+  MALE = 'male',
+  FEMALE = 'female',
+  OTHER = 'other',
 }
 
 export type UpdateGroupPayload = {
