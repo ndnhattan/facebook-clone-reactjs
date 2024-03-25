@@ -28,7 +28,7 @@ export const LoginForm = () => {
       console.log('Success');
       socket.connect();
       console.log(socket.connected);
-      navigate('/conversations');
+      navigate('/messenger/conversations');
     } catch (err) {
       console.log(socket.connected);
       console.log(err);

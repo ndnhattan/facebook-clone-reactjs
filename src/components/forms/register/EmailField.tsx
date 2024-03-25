@@ -1,6 +1,4 @@
-import { AxiosError } from 'axios';
 import { FC } from 'react';
-import { checkUsernameExists } from '../../../utils/api';
 import { RegisterFormFieldProps } from '../../../utils/types/form';
 
 export const EmailField: FC<RegisterFormFieldProps> = ({
@@ -21,28 +19,20 @@ export const EmailField: FC<RegisterFormFieldProps> = ({
         className="w-full bg-inherit outline-none"
         type="text"
         id="username"
-        {...register('username', {
+        {...register('email', {
           required: 'Username is required',
-          minLength: {
-            value: 3,
-            message: 'Must be 3 characters long',
-          },
-          maxLength: {
-            value: 16,
-            message: 'Exceeds 16 characters',
-          },
-          validate: {
-            checkUsername: async (username: string) => {
-              try {
-                await checkUsernameExists(username);
-              } catch (err) {
-                return (
-                  (err as AxiosError).response?.status === 409 &&
-                  'Username already exists'
-                );
-              }
-            },
-          },
+          // validate: {
+          //   checkUsername: async (username: string) => {
+          //     try {
+          //       await checkUsernameExists(username);
+          //     } catch (err) {
+          //       return (
+          //         (err as AxiosError).response?.status === 409 &&
+          //         'Username already exists'
+          //       );
+          //     }
+          //   },
+          // },
         })}
       />
     </div>

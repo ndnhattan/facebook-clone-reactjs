@@ -26,9 +26,12 @@ export const RegisterForm: FC<Props> = ({ setShowModal }) => {
     console.log(data);
     try {
       await postRegisterUser(data);
-      navigate('/login');
+      setShowModal(false);
       toast.clearWaitingQueue();
-      toast('Account created!', { type: 'success', icon: true });
+      toast('Account created. Please login to continue!', {
+        type: 'success',
+        icon: true,
+      });
     } catch (err) {
       console.log(err);
       toast.clearWaitingQueue();
