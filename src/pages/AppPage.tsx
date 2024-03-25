@@ -171,7 +171,7 @@ export const AppPage = () => {
   return (
     <div>
       {isReceivingCall && caller && <CallReceiveDialog />}
-      <div className="flex h-screen">
+      <div className="flex flex-col h-screen">
         <UserSidebar />
         <Outlet />
       </div>

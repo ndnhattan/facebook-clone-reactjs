@@ -60,11 +60,11 @@ export const ConversationPage = () => {
   }, [id]);
 
   return (
-    <>
+    <div className="bg-white flex-1 flex">
       {showSidebar && <ConversationSidebar />}
       {!id && !showSidebar && <ConversationSidebar />}
       {!id && showSidebar && <ConversationPanel />}
       <Outlet />
-    </>
+    </div>
   );
 };

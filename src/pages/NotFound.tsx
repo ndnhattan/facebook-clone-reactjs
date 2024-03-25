@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const NotFound = () => {
   return (
-    <div className="bg-primary-gray h-full pt-48">
+    <div className="bg-primary-gray h-full pt-48 flex-1">
       <div className=" flex flex-col items-center max-w-[400px] mx-auto">
         <img src="/not_found.svg" width={100} height={100} />
         <h2 className="text-lg font-bold mt-2">

@@ -49,7 +49,7 @@ export const ConversationSidebar = () => {
   }, []);
 
   return (
-    <div className="border-r w-[500px]">
+    <div className="border-r w-[470px]">
       {showModal && conversationType === 'private' && (
         <CreateConversationModal setShowModal={setShowModal} />
       )}

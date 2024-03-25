@@ -58,7 +58,7 @@ export const friendsNavbarItems = [
 export const userSidebarItems: UserSidebarItemType[] = [
   {
     id: 'conversations',
-    pathname: '/conversations',
+    pathname: '/messenger/conversations',
   },
   {
     id: 'friends',

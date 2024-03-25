@@ -28,6 +28,7 @@ import { CurrentCallPage } from './pages/calls/CurrentCallPage';
 import { PublicRoute } from './components/PublicRoute';
 import { setTheme } from './utils/helpers';
 import NotFound from './pages/NotFound';
+import Home from './pages/facebook/Home';
 
 enableMapSet();
 
@@ -65,6 +66,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
           </Route>
           <Route element={<AuthenticatedRoute children={<AppPage />} />}>
+            <Route index element={<Home />}></Route>
             <Route path="messenger">
               <Route path="conversations" element={<ConversationPage />}>
                 <Route
@@ -75,7 +77,7 @@ function App() {
                     />
                   }
                 />
-                R
+                R R
               </Route>
               <Route path="groups" element={<GroupPage />}>
                 <Route

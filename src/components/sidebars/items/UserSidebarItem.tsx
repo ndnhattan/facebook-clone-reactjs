@@ -26,9 +26,10 @@ export const UserSidebarItem: FC<Props> = ({ item }) => {
     return pathname.includes(item.pathname);
   };
   return (
-    <UserSidebarItemStyle
+    <div
+      className="w-full flex items-center justify-center px-[18px] py-[20px] relative"
+      //background-color: ${({ active }) => active && '#1e1e1e'
       onClick={() => navigate(item.pathname)}
-      active={isActive()}
     >
       <Icon size={ICON_SIZE} strokeWidth={STROKE_WIDTH} />
       {item.id === 'friends' && friendRequests.length > 0 && (
@@ -36,6 +37,6 @@ export const UserSidebarItem: FC<Props> = ({ item }) => {
           {friendRequests.length > 9 ? '10+' : friendRequests.length}
         </IconBadge>
       )}
-    </UserSidebarItemStyle>
+    </div>
   );
 };

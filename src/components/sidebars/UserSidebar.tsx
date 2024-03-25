@@ -4,9 +4,10 @@ import { UserSidebarItem } from './items/UserSidebarItem';
 import { AuthContext } from '../../utils/context/AuthContext';
 import { UpdatePresenceStatusModal } from '../modals/UpdatePresenceStatusModal';
 import { RiLogoutCircleLine } from 'react-icons/ri';
-import { UserAvatar } from '../users/UserAvatar';
 import { logoutUser as logoutUserAPI } from '../../utils/api';
 import { useNavigate } from 'react-router-dom';
+import facebookIcon from '../../__assets__/facebook.png';
+import { Search } from 'akar-icons';
 
 export const UserSidebar = () => {
   const [showModal, setShowModal] = useState(false);
@@ -25,19 +26,27 @@ export const UserSidebar = () => {
   return (
     <>
       {showModal && <UpdatePresenceStatusModal setShowModal={setShowModal} />}
-      <div className="flex flex-col items-center flex-[0_0_80px] bg-[#15161E]">
-        <header className="h-[90px] flex items-center justify-center border-b border-[#494949a9] w-full box-border">
-          <UserAvatar user={user!} onClick={() => setShowModal(true)} />
-        </header>
-        <div className="w-full h-full flex flex-col items-center">
+      <div className="flex items-center bg-white px-2 border-b">
+        <div className="flex items-center gap-2 px-2">
+          <img src={facebookIcon} width={40} height={40} alt="" />
+          <div className="flex items-center bg-primary-gray rounded-3xl py-2 px-[10px] gap-2">
+            <Search size={16} />
+            <input
+              type="text"
+              placeholder="Search Facebook"
+              className="bg-inherit rounded-r-3xl outline-none w-[200px]"
+            />
+          </div>
+        </div>
+        <div className="w-full h-full flex items-center">
           {userSidebarItems.map((item) => (
             <UserSidebarItem item={item} key={item.id} />
           ))}
         </div>
 
-        <footer className="py-[18px]">
+        <div className="py-[18px]">
           <RiLogoutCircleLine size={30} onClick={() => logoutUser()} />
-        </footer>
+        </div>
       </div>
     </>
   );
