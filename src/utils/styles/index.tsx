@@ -233,7 +233,7 @@ export const MessagePanelHeaderStyle = styled.header`
 `;
 
 export const MessagePanelBody = styled.div`
-  padding: 32px 32px 0 32px;
+  padding: 32px 8px 0 16px;
   padding-top: 0;
   box-sizing: border-box;
   flex: 1 1 auto;

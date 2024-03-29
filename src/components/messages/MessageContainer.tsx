@@ -10,11 +10,7 @@ import { selectType } from '../../store/selectedSlice';
 import { MessageItemHeader } from './MessageItemHeader';
 import { useHandleClick, useKeydown } from '../../utils/hooks';
 import { UserAvatar } from '../users/UserAvatar';
-import {
-  MessageContainerStyle,
-  MessageItemContainer,
-  MessageItemDetails,
-} from '../../utils/styles';
+import { MessageItemContainer, MessageItemDetails } from '../../utils/styles';
 import {
   editMessageContent,
   resetMessageContainer,
@@ -23,7 +19,6 @@ import {
   setSelectedMessage,
   toggleContextMenu,
 } from '../../store/messageContainerSlice';
-import { SystemMessage } from './system/SystemMessage';
 import { SystemMessageList } from './system/SystemMessageList';
 import { AuthContext } from '../../utils/context/AuthContext';
 import { MessageItemContainerBody } from './MessageItemContainerBody';
@@ -75,16 +70,28 @@ export const MessageContainer = () => {
   ) => {
     const currentMessage = messages[index];
     const nextMessage = messages[index + 1];
+    const prevMessage = messages[index - 1];
     const showMessageHeader =
       messages.length === index + 1 ||
       currentMessage.author.id !== nextMessage.author.id;
+    const showAvatar =
+      currentMessage.author.id !== user?.id &&
+      prevMessage?.author.id !== currentMessage.author.id;
+    const owner = user?.id === message.author.id;
     return (
-      <MessageItemContainer
+      <div
+        className={`flex items-center gap-2 py-[1px] ${
+          owner ? 'justify-between' : ''
+        }`}
         key={message.id}
         onContextMenu={(e) => onContextMenu(e, message)}
       >
-        {showMessageHeader && <UserAvatar user={message.author} />}
-        {showMessageHeader ? (
+        {showAvatar ? (
+          <UserAvatar user={message.author} size="small" />
+        ) : (
+          <div className="w-[26px]"></div>
+        )}
+        {/* {showMessageHeader ? (
           <MessageItemDetails>
             <MessageItemHeader message={message} />
             <MessageItemContainerBody
@@ -94,15 +101,15 @@ export const MessageContainer = () => {
               owner={user?.id === message.author.id}
             />
           </MessageItemDetails>
-        ) : (
-          <MessageItemContainerBody
-            message={message}
-            onEditMessageChange={onEditMessageChange}
-            padding="0 0 0 70px"
-            owner={user?.id === message.author.id}
-          />
-        )}
-      </MessageItemContainer>
+        ) : ( */}
+        <MessageItemContainerBody
+          message={message}
+          onEditMessageChange={onEditMessageChange}
+          padding="0 0 0 70px"
+          owner={user?.id === message.author.id}
+        />
+        {/* )} */}
+      </div>
     );
   };
 

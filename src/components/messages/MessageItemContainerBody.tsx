@@ -30,7 +30,7 @@ export const MessageItemContainerBody: FC<Props> = ({
         </MessageItemContent>
       ) : (
         <div
-          className={`w-full whitespace-pre-wrap rounded-2xl px-2 ${
+          className={`w-fit whitespace-pre-wrap rounded-3xl px-3 py-[6px] ${
             owner ? 'bg-primary-blue text-white' : 'bg-primary-gray '
           }`}
         >
