@@ -1,4 +1,3 @@
-import { MessageTextarea } from '../../utils/styles/inputs/Textarea';
 import { FC, Dispatch, SetStateAction, useRef } from 'react';
 import { ClipboardEvent, DragEvent } from '../../utils/types';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,7 +25,7 @@ export const MessageTextField: FC<Props> = ({
   sendTypingStatus,
   sendMessage,
 }) => {
-  const DEFAULT_TEXTAREA_HEIGHT = 21;
+  const DEFAULT_TEXTAREA_HEIGHT = 36;
   const ref = useRef<HTMLTextAreaElement>(null);
   const dispatch = useDispatch();
   const { error } = useToast({ theme: 'dark' });
@@ -87,7 +86,8 @@ export const MessageTextField: FC<Props> = ({
 
   return (
     <textarea
-      className="bg-inherit w-full resize-none my-1 outline-none h-[24px]"
+      rows={1}
+      className="bg-inherit w-full resize-none outline-none py-1"
       ref={ref}
       value={message}
       onChange={onMessageChange}

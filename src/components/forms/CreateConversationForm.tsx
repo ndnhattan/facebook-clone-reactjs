@@ -45,9 +45,10 @@ export const CreateConversationForm: FC<Props> = ({ setShowModal }) => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(message, selectedUser);
     if (!message || !selectedUser) return;
     return dispatch(
-      createConversationThunk({ username: selectedUser.username, message })
+      createConversationThunk({ email: selectedUser.email, message })
     )
       .unwrap()
       .then(({ data }) => {
@@ -87,7 +88,7 @@ export const CreateConversationForm: FC<Props> = ({ setShowModal }) => {
           />
         </InputContainer>
       </section>
-      <Button>Create Conversation</Button>
+      <Button type="submit">Create Conversation</Button>
     </form>
   );
 };

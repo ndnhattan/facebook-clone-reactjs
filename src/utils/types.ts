@@ -51,7 +51,7 @@ export type Conversation = {
 };
 
 export type CreateConversationParams = {
-  username: string;
+  email: string;
   message: string;
 };
 

@@ -1,5 +1,5 @@
 import { Dispatch, FC, SetStateAction, useState } from 'react';
-import { CharacterLimit, MessageInputContainer } from '../../utils/styles';
+import { CharacterLimit } from '../../utils/styles';
 import { MessageTextField } from '../inputs/MessageTextField';
 import { FaceVeryHappy } from 'akar-icons';
 import styles from './index.module.scss';
@@ -27,14 +27,16 @@ export const MessageInputField: FC<Props> = ({
   return (
     <>
       <div
-        className={`rounded-[5px] w-full py-2 flex gap-[12px] relative ${
+        className={` flex gap-[12px] relative  px-2 py-3 ${
           isMultiLine ? 'items-end' : 'items-center'
         }`}
       >
-        <MessageAttachmentActionIcon />
+        <MessageAttachmentActionIcon isMultiLine={isMultiLine} />
         <form
           onSubmit={sendMessage}
-          className={`w-full flex bg-primary-gray pl-3 gap-1 pr-2 py-[3px] rounded-3xl items-center`}
+          className={`w-full flex bg-primary-gray pl-3 gap-1 pr-2 py-[2px] rounded-3xl ${
+            isMultiLine ? 'items-end' : 'items-center'
+          }`}
         >
           <MessageTextField
             message={content}
@@ -44,7 +46,11 @@ export const MessageInputField: FC<Props> = ({
             sendTypingStatus={sendTypingStatus}
             sendMessage={sendMessage}
           />
-          <FaceVeryHappy className={styles.icon} size={24} color="#0084ff" />
+          <FaceVeryHappy
+            className={isMultiLine ? 'mb-[6px]' : ''}
+            size={24}
+            color="#0084ff"
+          />
         </form>
         {atMaxLength && (
           <CharacterLimit atMaxLength={atMaxLength}>

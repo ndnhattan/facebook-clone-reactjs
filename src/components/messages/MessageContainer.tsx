@@ -107,7 +107,8 @@ export const MessageContainer = () => {
   };
 
   return (
-    <MessageContainerStyle
+    <div
+      className="box-border py-[10px] flex flex-col overflow-y-auto"
       onScroll={(e) => {
         const node = e.target as HTMLDivElement;
         const scrollTopMax = node.scrollHeight - node.clientHeight;
@@ -116,13 +117,13 @@ export const MessageContainer = () => {
         }
       }}
     >
-      <div className="flex flex-col">
+      <div className="flex flex-col-reverse">
         <SystemMessageList />
         {selectedType === 'private'
           ? conversationMessages?.messages.map(mapMessages)
           : groupMessages?.messages.map(mapMessages)}
       </div>
       {showContextMenu && <SelectedMessageContextMenu />}
-    </MessageContainerStyle>
+    </div>
   );
 };

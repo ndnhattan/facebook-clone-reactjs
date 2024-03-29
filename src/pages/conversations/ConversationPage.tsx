@@ -60,7 +60,7 @@ export const ConversationPage = () => {
   }, [id]);
 
   return (
-    <div className="bg-white flex-1 flex">
+    <div className="bg-white flex-1 flex overflow-hidden">
       {showSidebar && <ConversationSidebar />}
       {!id && !showSidebar && <ConversationSidebar />}
       {!id && showSidebar && <ConversationPanel />}

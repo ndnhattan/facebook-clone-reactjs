@@ -5,7 +5,6 @@ import {
 } from '../styleTypes';
 
 export const FriendsPageStyle = styled.div`
-  background-color: #101010;
   height: 100%;
   width: 100%;
 `;

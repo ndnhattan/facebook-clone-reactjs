@@ -194,7 +194,11 @@ export const fetchFriendRequests = () =>
   axiosClient.get<FriendRequest[]>('/friends/requests', config);
 
 export const createFriendRequest = (username: string) =>
-  axiosClient.post<FriendRequest>('/friends/requests', { username }, config);
+  axiosClient.post<FriendRequest>(
+    '/friends/requests',
+    { email: username },
+    config
+  );
 
 export const cancelFriendRequest = (id: number) =>
   axiosClient.delete<CancelFriendRequestResponse>(

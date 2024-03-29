@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import {
   RecipientResultContainerStyle,
   RecipientResultItem,
@@ -15,13 +15,16 @@ export const RecipientResultContainer: FC<Props> = ({
   userResults,
   handleUserSelect,
 }) => {
+  useEffect(() => {
+    handleUserSelect(userResults[0]);
+  }, [userResults]);
   return (
     <RecipientResultContainerStyle>
       <RecipientScrollableItemContainer>
         {userResults.map((user) => (
           <RecipientResultItem
             key={user.id}
-            onClick={() => handleUserSelect(user)}
+            onClick={() => handleUserSelect(userResults[0])}
           >
             <span>{user.username}</span>
           </RecipientResultItem>

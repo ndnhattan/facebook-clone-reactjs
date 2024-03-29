@@ -14,7 +14,7 @@ import { createMessage } from '../../utils/api';
 import { AuthContext } from '../../utils/context/AuthContext';
 import { getRecipientFromConversation } from '../../utils/helpers';
 import { useToast } from '../../utils/hooks/useToast';
-import { MessagePanelBody } from '../../utils/styles';
+import { MessagePanelBody, MessageTypingStatus } from '../../utils/styles';
 import { MessageAttachmentContainer } from './attachments/MessageAttachmentContainer';
 import { MessageContainer } from './MessageContainer';
 import { MessageInputField } from './MessageInputField';
@@ -99,28 +99,22 @@ export const MessagePanel: FC<Props> = ({
 
   return (
     <>
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col w-full  ">
         <MessagePanelHeader />
         <MessagePanelBody>
           <MessageContainer />
         </MessagePanelBody>
-        <div className=" px-2 h-[60px] flex items-center">
-          {attachments.length > 0 && <MessageAttachmentContainer />}
-          <MessageInputField
-            content={content}
-            setContent={setContent}
-            sendMessage={sendMessage}
-            sendTypingStatus={sendTypingStatus}
-            placeholderName={
-              selectedType === 'group'
-                ? group?.title || 'Group'
-                : recipient?.firstName || 'user'
-            }
-          />
-          {/* <MessageTypingStatus>
-            {isRecipientTyping ? `${recipient?.firstName} is typing...` : ''}
-          </MessageTypingStatus> */}
-        </div>
+        <MessageInputField
+          content={content}
+          setContent={setContent}
+          sendMessage={sendMessage}
+          sendTypingStatus={sendTypingStatus}
+          placeholderName={
+            selectedType === 'group'
+              ? group?.title || 'Group'
+              : recipient?.firstName || 'user'
+          }
+        />
       </div>
     </>
   );

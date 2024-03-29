@@ -11,7 +11,11 @@ import { FileInput } from '../../utils/styles/inputs/Textarea';
 import { DivMouseEvent, InputChangeEvent } from '../../utils/types';
 import styles from './index.module.scss';
 
-export const MessageAttachmentActionIcon = () => {
+export const MessageAttachmentActionIcon = ({
+  isMultiLine,
+}: {
+  isMultiLine?: boolean;
+}) => {
   const attachmentIconRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch<AppDispatch>();
@@ -41,7 +45,11 @@ export const MessageAttachmentActionIcon = () => {
   };
 
   return (
-    <div ref={attachmentIconRef} onClick={onClick}>
+    <div
+      ref={attachmentIconRef}
+      onClick={onClick}
+      className={isMultiLine ? 'mb-2' : ''}
+    >
       <CirclePlusFill
         size={24}
         color="#0084ff"
