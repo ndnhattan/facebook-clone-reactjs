@@ -10,6 +10,10 @@ module.exports = {
 
         'secondary-gray': '#606770',
       },
+      flex: {
+        2: '2 2 0%',
+        3: '3 3 0%',
+      },
     },
   },
   plugins: [],

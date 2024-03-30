@@ -1,6 +1,6 @@
 import {
   ArrowCycle,
-  ChatDots,
+  Home,
   Crown,
   Minus,
   Person,
@@ -52,18 +52,16 @@ export const isGroupOwner = (user?: User, group?: Group) =>
 
 export const getUserSidebarIcon = (id: UserSidebarRouteType) => {
   switch (id) {
-    case 'conversations':
-      return ChatDots;
+    case 'home':
+      return Home;
     case 'friends':
       return Person;
-    case 'connections':
+    case 'watch':
       return ArrowCycle;
-    case 'settings':
+    case 'groups':
       return Gear;
-    case 'calls':
+    case 'play':
       return IoMdVideocam;
-    default:
-      return ChatDots;
   }
 };
 

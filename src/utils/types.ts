@@ -241,11 +241,11 @@ export type AcceptFriendRequestResponse = {
 };
 
 export type UserSidebarRouteType =
-  | 'conversations'
+  | 'home'
   | 'friends'
-  | 'connections'
-  | 'settings'
-  | 'calls';
+  | 'watch'
+  | 'groups'
+  | 'play';
 
 export type UserSidebarItemType = {
   id: UserSidebarRouteType;

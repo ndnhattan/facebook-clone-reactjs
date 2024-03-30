@@ -18,11 +18,16 @@ export const UserAvatar: FC<Props> = ({ user, onClick, size }) => {
       : defaultAvatar;
   };
 
+  const sz =
+    size === 'small'
+      ? 'w-[26px] h-[26px]'
+      : size === 'large'
+      ? 'w-[40px] h-[40px]'
+      : 'w-[50px] h-[50px]';
+
   return (
     <img
-      className={`${
-        size === 'small' ? `w-[26px] h-[26px] border` : 'w-[50px] h-[50px]'
-      } cursor-pointer rounded-full`}
+      className={`${sz} cursor-pointer rounded-full border`}
       src={getProfilePicture()}
       alt="avatar"
       onClick={onClick}

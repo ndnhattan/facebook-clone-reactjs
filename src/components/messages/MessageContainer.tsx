@@ -80,7 +80,7 @@ export const MessageContainer = () => {
     const owner = user?.id === message.author.id;
     return (
       <div
-        className={`flex items-center gap-2 py-[1px] ${
+        className={`flex w-full items-center gap-2 py-[1px] ${
           owner ? 'justify-between' : ''
         }`}
         key={message.id}
